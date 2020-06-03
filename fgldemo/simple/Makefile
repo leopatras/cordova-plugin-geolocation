@@ -49,8 +49,9 @@ gma.build: all
 	cd ../../.. && gmabuildtool scaffold --install-plugins $(GMAPLUGIN) && cd -
 	gmabuildtool build --build-quietly --build-cordova $(GMAPLUGIN) --build-app-package-name $(BUNDLE_IDENTIFIER) 
 
-gma.install: gma.build
-	$$ANDROID_SDK_ROOT/platform-tools/adb install -r ./gma/project/app/build/app/outputs/apk/app-unsigned.apk
+#GMA_DEBUG=-d
+gma.install: 
+	$$ANDROID_SDK_ROOT/platform-tools/adb $(GMA_DEBUG) install -r `find . -name app-unsigned.apk`
 
 
 clean::

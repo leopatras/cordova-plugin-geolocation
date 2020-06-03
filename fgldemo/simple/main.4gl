@@ -4,6 +4,8 @@ MAIN
   MENU
     BEFORE MENU
       CALL DIALOG.setActionHidden("cordovacallback",1)
+    COMMAND "getPermission"
+      CALL getPermission()
     COMMAND "GetLocation"
       CALL getLocation()
     ON ACTION cordovacallback ATTRIBUTE(DEFAULTVIEW=NO)
@@ -23,6 +25,13 @@ MAIN
       EXIT MENU
   END MENU
 END MAIN
+
+FUNCTION getPermission()
+  DEFINE result STRING
+  CALL ui.Interface.frontCall("cordova","call",
+                             ["Geolocation","getPermission"],[result])
+  ERROR "result=",result
+END FUNCTION
 
 FUNCTION getLocation()
   DEFINE result STRING
